@@ -1,0 +1,16 @@
+[package]
+name = "unified-vec"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+default = ["std", "heapless"]
+std = []
+heapless = ["dep:heapless"]
+serde = ["dep:serde"]
+
+[dependencies]
+heapless = {version = "0.7.16", optional = true}
+serde = {version = "1.0", optional = true}
