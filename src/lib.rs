@@ -3,8 +3,6 @@ mod hvec;
 #[cfg(feature="std")]
 mod svec;
 
-mod traits;
-pub(crate) use traits::*;
 
 #[cfg(feature="heapless")]
 pub type Vec<T, const N: usize> = hvec::HVec<T, N>;
