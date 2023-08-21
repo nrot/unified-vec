@@ -46,3 +46,33 @@ impl<T: Default + Clone, const N: usize> HVec<T, N> {
         self.0.resize_default(new_len)
     }
 }
+
+impl<T: Clone, const N:usize> Clone for HVec<T, N>{
+    fn clone(&self) -> Self {
+        Self(self.0.clone())
+    }
+}
+
+impl<T:Default, const N:usize> Default for HVec<T, N>{
+    fn default() -> Self {
+        Self(Default::default())
+    }
+}
+
+impl<'a, T, const N: usize> IntoIterator for &'a HVec<T, N> {
+    type Item = &'a T;
+    type IntoIter = std::slice::Iter<'a, T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.iter()
+    }
+}
+
+impl<'a, T, const N: usize> IntoIterator for &'a mut HVec<T, N> {
+    type Item = &'a mut T;
+    type IntoIter = std::slice::IterMut<'a, T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.iter_mut()
+    }
+}
