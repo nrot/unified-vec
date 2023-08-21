@@ -1,25 +1,5 @@
 use core::slice::SliceIndex;
 
-pub trait UVec<T, const N: usize>:
-    UVecNew<T, N>
-    + UVecDeref<T, N>
-    + UVecGetInd<T, N, usize>
-    + UVecResize<T, N>
-    + UVecResizeDefault<T, N>
-{
-}
-impl<
-        T,
-        const N: usize,
-        U: UVecNew<T, N>
-            + UVecDeref<T, N>
-            + UVecGetInd<T, N, usize>
-            + UVecResize<T, N>
-            + UVecResizeDefault<T, N>,
-    > UVec<T, N> for U
-{
-}
-
 pub trait UVecNew<T, const N: usize> {
     fn new() -> Self;
     fn capacity(&self) -> usize;

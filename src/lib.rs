@@ -1,16 +1,22 @@
+#[cfg(feature="heapless")]
 mod hvec;
+#[cfg(feature="std")]
 mod svec;
 
 mod traits;
-pub use traits::*;
+pub(crate) use traits::*;
 
+#[cfg(feature="heapless")]
+pub type Vec<T, const N: usize> = hvec::HVec<T, N>;
+
+#[cfg(feature="std")]
+pub type Vec<T, const N: usize> = svec::SVec<T, N>;
 
 #[cfg(test)]
 mod tests {
-    use std::slice::SliceIndex;
-
     use super::*;
 
+    #[cfg(feature="heapless")]
     #[test]
     fn it_works() {
         let v: heapless::Vec<u32, 16> = heapless::Vec::new();
